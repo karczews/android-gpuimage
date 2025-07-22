@@ -1,4 +1,9 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'maven-publish'
+    id 'signing'
+}
 
 android {
     compileSdk COMPILE_SDK_VERSION as int
@@ -62,9 +67,6 @@ ext {
 
 // apply from: 'https://gist.githubusercontent.com/wasabeef/2f2ae8d97b429e7d967128125dc47854/raw/maven-central-v1.gradle'
 
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
-
 def sonatypeUsername = rootProject.hasProperty('sonatypeUsername')? rootProject.sonatypeUsername : ''
 def sonatypePassword = rootProject.hasProperty('sonatypePassword')? rootProject.sonatypePassword : ''
 
@@ -104,6 +106,7 @@ afterEvaluate {
             }
         }
         repositories {
+            mavenLocal()
             maven {
                 def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
                 def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
